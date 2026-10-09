@@ -21,7 +21,11 @@ import '../../index.css';
 
 import styles from './app.module.css';
 
-import { checkUserAuth, selectIsAuthChecked, selectUser } from '@/services/slices/userSlice';
+import {
+  checkUserAuth,
+  selectIsAuthChecked,
+  selectUser,
+} from '@/services/slices/userSlice';
 import {
   fetchIngredients,
   selectIngredients,
@@ -171,6 +175,16 @@ const AppContent = ({
           element={
             <ProtectedRoute>
               <ProfileOrders />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/feed/:number" element={<OrderInfo />} />
+        <Route path="/ingredients/:id" element={<IngredientDetails />} />
+        <Route
+          path="/profile/orders/:number"
+          element={
+            <ProtectedRoute>
+              <OrderInfo />
             </ProtectedRoute>
           }
         />

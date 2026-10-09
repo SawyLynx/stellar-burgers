@@ -56,10 +56,9 @@ export const constructorSlice = createSlice({
     removeIngredient: (state, action: PayloadAction<string>) => {
       state.ingredients = state.ingredients.filter((item) => item.id !== action.payload);
     },
-    clearConstructor: (state) => {
-      state.bun = null;
-      state.ingredients = [];
+    resetOrder: (state) => {
       state.orderModalData = null;
+      state.orderRequest = false;
     },
     moveIngredientUp: (state, action: PayloadAction<number>) => {
       const index = action.payload;
@@ -98,7 +97,7 @@ export const constructorSlice = createSlice({
 export const {
   addIngredient,
   removeIngredient,
-  clearConstructor,
+  resetOrder,
   moveIngredientUp,
   moveIngredientDown,
 } = constructorSlice.actions;

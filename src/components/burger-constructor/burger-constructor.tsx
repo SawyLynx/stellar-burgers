@@ -5,8 +5,8 @@ import type { TConstructorIngredient, TConstructorState } from '@utils-types';
 import { useDispatch, useSelector } from '../../services/store';
 import { useNavigate } from 'react-router-dom';
 import {
-  clearConstructor,
   createOrder,
+  resetOrder,
   selectConstructorBun,
   selectConstructorIngredients,
   selectOrderModalData,
@@ -47,7 +47,7 @@ export const BurgerConstructor = (): React.JSX.Element | null => {
   };
 
   const closeOrderModal = (): void => {
-    dispatch(clearConstructor());
+    dispatch(resetOrder());
   };
 
   const price = useMemo(
