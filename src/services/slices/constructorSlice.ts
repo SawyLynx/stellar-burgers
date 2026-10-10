@@ -86,6 +86,8 @@ export const constructorSlice = createSlice({
       .addCase(createOrder.fulfilled, (state, action) => {
         state.orderRequest = false;
         state.orderModalData = action.payload;
+        state.ingredients = [];
+        state.bun = null;
       })
       .addCase(createOrder.rejected, (state, action) => {
         state.orderRequest = false;
