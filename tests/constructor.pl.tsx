@@ -1,4 +1,8 @@
 import { test, expect } from '@playwright/test';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const mockCratorBun = 'text=Краторная булка N-200i';
 
@@ -11,7 +15,9 @@ const ModalOverlay =
 
 test.describe('constructor works correctly', () => {
   test.beforeEach(async ({ page }) => {
-    await page.routeFromHAR('tests/hars/api.har', {
+    const harPath = path.resolve(__dirname, 'hars/api.har');
+
+    await page.routeFromHAR(harPath, {
       url: /\/api\//,
       update: false,
       notFound: 'fallback',
@@ -21,7 +27,7 @@ test.describe('constructor works correctly', () => {
     await page
       .locator('button:has-text("Добавить")')
       .first()
-      .waitFor({ state: 'visible' });
+      .waitFor({ state: 'visible', timeout: 15000 });
   });
 
   test.describe('add ingredients to constructor works correctly', () => {
