@@ -12,7 +12,7 @@ const ModalOverlay =
 test.describe('constructor works correctly', () => {
   test.beforeEach(async ({ page }) => {
     await page.routeFromHAR('tests/hars/api.har', {
-      url: /.*\/api\/.*/,
+      url: /\/api\//,
       update: false,
       notFound: 'fallback',
     });
@@ -67,7 +67,7 @@ test.describe('constructor works correctly', () => {
         document.cookie = 'accessToken=Bearer mock-valid-access-token; path=/';
       });
 
-      await page.route(/.*\/api\/auth\/user/, async (route) => {
+      await page.route('**/api/auth/user', async (route) => {
         return route.fulfill({
           status: 200,
           contentType: 'application/json',
@@ -81,7 +81,7 @@ test.describe('constructor works correctly', () => {
         });
       });
 
-      await page.route(/.*\/api\/orders/, async (route) => {
+      await page.route('**/api/orders', async (route) => {
         return route.fulfill({
           status: 200,
           contentType: 'application/json',

@@ -60,11 +60,16 @@ describe('constructorSlice reducer works correctly', () => {
     const action = addIngredient(mockSauce);
     const state = constructorReducer(initialState, action);
     expect(state.ingredients).toHaveLength(1);
-    expect(state.ingredients[0]).toEqual(expect.objectContaining({ _id: 'sauce123', type: 'sauce' }));
+    expect(state.ingredients[0]).toEqual(
+      expect.objectContaining({ _id: 'sauce123', type: 'sauce' })
+    );
   });
 
   test('remove ingredient works correctly', () => {
-    const ingredientWithId: TConstructorIngredient = { ...mockSauce, id: 'unique-id-111' };
+    const ingredientWithId: TConstructorIngredient = {
+      ...mockSauce,
+      id: 'unique-id-111',
+    };
     const populatedState = { ...initialState, ingredients: [ingredientWithId] };
 
     const action = removeIngredient('unique-id-111');
@@ -98,7 +103,7 @@ describe('constructorSlice reducer works correctly', () => {
     const dirtyState = {
       ...initialState,
       orderModalData: { number: 123 } as any,
-      orderRequest: true
+      orderRequest: true,
     };
     const action = resetOrder();
     const state = constructorReducer(dirtyState, action);
@@ -119,7 +124,7 @@ describe('constructorSlice reducer works correctly', () => {
       ...initialState,
       bun: mockBun,
       ingredients: [{ ...mockSauce, id: '1' }],
-      orderRequest: true
+      orderRequest: true,
     };
     const action = { type: createOrder.fulfilled.type, payload: mockOrder };
     const state = constructorReducer(dirtyState, action);
@@ -135,7 +140,7 @@ describe('constructorSlice reducer works correctly', () => {
     const action = {
       type: createOrder.rejected.type,
       error: { message: errorMsg },
-      payload: errorMsg
+      payload: errorMsg,
     };
     const state = constructorReducer({ ...initialState, orderRequest: true }, action);
 
