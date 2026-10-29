@@ -6,7 +6,7 @@ import constructorReducer, {
   resetOrder,
   createOrder,
 } from '../constructorSlice';
-import { TIngredient, TConstructorIngredient } from '@utils-types';
+import { TIngredient, TConstructorIngredient, TOrder } from '@utils-types';
 
 describe('constructorSlice reducer works correctly', () => {
   const initialState = {
@@ -102,7 +102,7 @@ describe('constructorSlice reducer works correctly', () => {
   test('resetOrder works correctly', () => {
     const dirtyState = {
       ...initialState,
-      orderModalData: { number: 123 } as any,
+      orderModalData: { number: 123 } as Partial<TOrder> as TOrder,
       orderRequest: true,
     };
     const action = resetOrder();
